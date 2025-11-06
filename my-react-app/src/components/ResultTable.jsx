@@ -1,4 +1,3 @@
-// ...existing code...
 import React, { useEffect, useState } from "react";
 import styles from "./ResultTable.module.css";
 
@@ -121,4 +120,3 @@ function ResultTable({ keyword = "", user, onAdded }) {
 }
 
 export default ResultTable;
-// ...existing code...

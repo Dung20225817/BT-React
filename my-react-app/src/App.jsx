@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm";
@@ -52,4 +51,3 @@ function App() {
 }
 
 export default App;
-// ...existing code...
