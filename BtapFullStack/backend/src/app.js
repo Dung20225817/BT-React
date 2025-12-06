@@ -1,35 +1,35 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
+const application = express();
 
-// Import routes
-const studentRouter = require('./router/studentRouter');
+// Import các routes
+const recordRoutes = require('./router/studentRouter');
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Middleware configuration
+application.use(cors());
+application.use(express.json());
+application.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Express API' });
+// Root endpoint
+application.get('/', (req, res) => {
+  res.json({ message: 'Chào mừng đến với Express API' });
 });
 
-// API Routes
-app.use('/api/students', studentRouter);
+// API Routes configuration
+application.use('/api/students', recordRoutes);
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
+// Handler cho route không tồn tại
+application.use((req, res) => {
+  res.status(404).json({ message: 'Đường dẫn không tìm thấy' });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
+// Middleware xử lý lỗi toàn cục
+application.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ 
-    message: 'Something went wrong!',
+    message: 'Đã xảy ra lỗi hệ thống!',
     error: process.env.NODE_ENV === 'development' ? err.message : {}
   });
 });
 
-module.exports = app;
+module.exports = application;

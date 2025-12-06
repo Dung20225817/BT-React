@@ -1,64 +1,64 @@
-const Student = require('../model/Student');
+const SchoolRecord = require('../model/Student');
 
-// Lấy danh sách tất cả học sinh
-exports.getAllStudents = async (req, res) => {
+// Lấy toàn bộ danh sách
+exports.retrieveAllRecords = async (req, res) => {
   try {
-    const students = await Student.find();
-    res.json(students);
+    const recordCollection = await SchoolRecord.find();
+    res.json(recordCollection);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Tạo học sinh mới
-exports.createStudent = async (req, res) => {
+// Tạo bản ghi mới
+exports.registerNewRecord = async (req, res) => {
   try {
-    const student = new Student(req.body);
-    await student.save();
-    res.status(201).json(student);
+    const freshRecord = new SchoolRecord(req.body);
+    await freshRecord.save();
+    res.status(201).json(freshRecord);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-// Lấy học sinh theo ID
-exports.getStudentById = async (req, res) => {
+// Tìm bản ghi theo mã ID
+exports.searchRecordByIdentifier = async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id);
-    if (!student) {
-      return res.status(404).json({ error: 'Không thấy học sinh' });
+    const locatedRecord = await SchoolRecord.findById(req.params.id);
+    if (!locatedRecord) {
+      return res.status(404).json({ error: 'Bản ghi không tìm thấy' });
     }
-    res.json(student);
+    res.json(locatedRecord);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Cập nhật học sinh
-exports.updateStudent = async (req, res) => {
+// Cập nhật bản ghi
+exports.reviseRecord = async (req, res) => {
   try {
-    const student = await Student.findByIdAndUpdate(
+    const modifiedRecord = await SchoolRecord.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true, runValidators: true }
     );
-    if (!student) {
-      return res.status(404).json({ error: 'Không tìm thấy học sinh' });
+    if (!modifiedRecord) {
+      return res.status(404).json({ error: 'Không tìm thấy bản ghi để cập nhật' });
     }
-    res.json(student);
+    res.json(modifiedRecord);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-// Xóa học sinh
-exports.deleteStudent = async (req, res) => {
+// Xóa bản ghi
+exports.eraseRecord = async (req, res) => {
   try {
-    const student = await Student.findByIdAndDelete(req.params.id);
-    if (!student) {
-      return res.status(404).json({ error: 'Không tìm thấy học sinh' });
+    const removedRecord = await SchoolRecord.findByIdAndDelete(req.params.id);
+    if (!removedRecord) {
+      return res.status(404).json({ error: 'Không tìm thấy bản ghi để xóa' });
     }
-    res.json({ message: 'Đã xóa học sinh', student });
+    res.json({ message: 'Đã xóa bản ghi thành công', student: removedRecord });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
