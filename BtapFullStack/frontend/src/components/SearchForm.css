@@ -1,0 +1,123 @@
+/* SearchForm.css */
+
+.filter-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+}
+
+.icon-holder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.lookup-icon {
+  width: 22px;
+  height: 22px;
+  color: #94a3b8;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.query-field {
+  width: 100%;
+  height: 52px;
+  padding: 14px 24px 14px 56px;
+  border: none;
+  border-radius: 14px;
+  outline: none;
+  font-size: 15px;
+  font-weight: 500;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  color: #0f172a;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 
+              0 0 0 1px #e2e8f0,
+              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+.query-field:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 
+              0 0 0 1px #cbd5e1,
+              inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.query-field:focus {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15), 
+              0 0 0 3px rgba(59, 130, 246, 0.25),
+              inset 0 1px 2px rgba(255, 255, 255, 1);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.query-field::placeholder {
+  color: #64748b;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.filter-wrapper:focus-within .lookup-icon {
+  color: #3b82f6;
+  transform: scale(1.15) rotate(5deg);
+}
+
+.field-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 0;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.filter-wrapper:focus-within .field-border {
+  opacity: 1;
+  animation: borderPulse 2s ease-in-out infinite;
+}
+
+@keyframes borderPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-wrapper {
+    min-width: 100%;
+  }
+
+  .query-field {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .lookup-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-holder {
+    width: 52px;
+  }
+
+  .query-field {
+    padding-left: 52px;
+  }
+}
