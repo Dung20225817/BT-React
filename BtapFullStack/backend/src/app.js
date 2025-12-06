@@ -15,14 +15,10 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Express API' });
 });
 
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date() });
-});
-
 // API Routes
 app.use('/api/students', studentRouter);
 
-// 404 handler - phải đặt sau tất cả routes
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });

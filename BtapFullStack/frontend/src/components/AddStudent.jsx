@@ -1,4 +1,3 @@
-// AddStudent.jsx
 import React from 'react'
 import './AddStudent.css'
 

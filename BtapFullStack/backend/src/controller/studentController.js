@@ -26,7 +26,7 @@ exports.getStudentById = async (req, res) => {
   try {
     const student = await Student.findById(req.params.id);
     if (!student) {
-      return res.status(404).json({ error: 'Không tìm thấy học sinh' });
+      return res.status(404).json({ error: 'Không thấy học sinh' });
     }
     res.json(student);
   } catch (err) {
@@ -58,7 +58,7 @@ exports.deleteStudent = async (req, res) => {
     if (!student) {
       return res.status(404).json({ error: 'Không tìm thấy học sinh' });
     }
-    res.json({ message: 'Đã xóa học sinh thành công', student });
+    res.json({ message: 'Đã xóa học sinh', student });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
